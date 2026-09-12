@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">Personal finance</p>
+            <h1>Expense Tracker</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="dashboard" aria-label="Dashboard summary">
+            <article class="stat-card accent">
+                <span>Total Spending</span>
+                <strong id="totalSpending">EGP 0.00</strong>
+            </article>
+            <article class="stat-card">
+                <span>Number of Expenses</span>
+                <strong id="expenseCount">0 expenses</strong>
+            </article>
+            <article class="stat-card">
+                <span>Most Expensive</span>
+                <strong id="mostExpensive">EGP 0.00</strong>
+            </article>
+            <article class="stat-card">
+                <span>Current Month Spending</span>
+                <strong id="monthlySpending">EGP 0.00</strong>
+            </article>
+        </section>
+
+        <section class="content-grid">
+            <aside class="panel">
+                <h2>Filters</h2>
+                <form id="filterForm" class="stacked-form">
+                    <label>
+                        Search
+                        <input type="text" id="searchInput" name="search" placeholder="Search description">
+                    </label>
+
+                    <label>
+                        Category
+                        <select id="categoryFilter" name="category">
+                            <option value="">All categories</option>
+                            <option value="FOOD">FOOD</option>
+                            <option value="TRANSPORT">TRANSPORT</option>
+                            <option value="ENTERTAINMENT">ENTERTAINMENT</option>
+                            <option value="SHOPPING">SHOPPING</option>
+                            <option value="HEALTH">HEALTH</option>
+                            <option value="EDUCATION">EDUCATION</option>
+                            <option value="BILLS">BILLS</option>
+                            <option value="RENT">RENT</option>
+                            <option value="TRAVEL">TRAVEL</option>
+                            <option value="OTHER">OTHER</option>
+                        </select>
+                    </label>
+
+                    <div class="split-fields">
+                        <label>
+                            From
+                            <input type="date" id="fromDate" name="fromDate">
+                        </label>
+                        <label>
+                            To
+                            <input type="date" id="toDate" name="toDate">
+                        </label>
+                    </div>
+
+                    <label>
+                        Sort
+                        <select id="sortSelect" name="sort">
+                            <option value="expenseDate,desc">Newest</option>
+                            <option value="expenseDate,asc">Oldest</option>
+                            <option value="amount,desc">Highest amount</option>
+                            <option value="amount,asc">Lowest amount</option>
+                        </select>
+                    </label>
+
+                    <div class="button-row">
+                        <button type="submit" class="primary-btn">Apply</button>
+                        <button type="button" id="clearFilters" class="secondary-btn">Clear</button>
+                    </div>
+                </form>
+            </aside>
+
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Expenses</h2>
+                </div>
+
+                <form id="expenseForm" class="expense-form stacked-form">
+                    <input type="hidden" id="expenseId" name="expenseId">
+
+                    <div class="split-fields">
+                        <label>
+                            Amount
+                            <input type="number" id="amount" name="amount" step="0.01" min="0.01" required>
+                        </label>
+                        <label>
+                            Category
+                            <select id="category" name="category" required>
+                                <option value="FOOD">FOOD</option>
+                                <option value="TRANSPORT">TRANSPORT</option>
+                                <option value="ENTERTAINMENT">ENTERTAINMENT</option>
+                                <option value="SHOPPING">SHOPPING</option>
+                                <option value="HEALTH">HEALTH</option>
+                                <option value="EDUCATION">EDUCATION</option>
+                                <option value="BILLS">BILLS</option>
+                                <option value="RENT">RENT</option>
+                                <option value="TRAVEL">TRAVEL</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <label>
+                        Description
+                        <input type="text" id="description" name="description" maxlength="255" required>
+                    </label>
+
+                    <label>
+                        Expense Date
+                        <input type="date" id="expenseDate" name="expenseDate" required>
+                    </label>
+
+                    <div class="button-row">
+                        <button type="submit" id="submitExpense" class="primary-btn">Add Expense</button>
+                        <button type="button" id="cancelEdit" class="secondary-btn hidden">Cancel</button>
+                    </div>
+                </form>
+            </section>
+        </section>
+
+        <section class="panel table-panel">
+            <div class="panel-header">
+                <h2>Expense List</h2>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expenseTableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="pagination" id="pagination"></div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Spending by Category</h2>
+            </div>
+            <div id="categoryBreakdown" class="category-breakdown"></div>
+        </section>
+    </main>
+
+    <script src="/app.js"></script>
+</body>
+</html>
