@@ -2,24 +2,23 @@ spring:
   application:
     name: expenseTracker
   datasource:
-    url: ${DB_URL:jdbc:h2:mem:expense-tracker;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false}
-    username: ${DB_USERNAME:sa}
-    password: ${DB_PASSWORD:}
-    driver-class-name: ${DB_DRIVER:org.h2.Driver}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: ${DDL_AUTO:update}
+      ddl-auto: validate
     properties:
       hibernate:
         format_sql: true
-        dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.H2Dialect}
-    open-in-view: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   flyway:
-    enabled: ${FLYWAY_ENABLED:false}
+    enabled: true
     baseline-on-migrate: true
-    url: ${DB_URL:jdbc:h2:mem:expense-tracker;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false}
-    user: ${DB_USERNAME:sa}
-    password: ${DB_PASSWORD:}
+    url: ${DB_URL}
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 server:
   port: 8080
 logging:
